@@ -89,7 +89,6 @@ def parse_repo_file(path):
             m = regex_repo_entry.match(l)
             if m:
                 dct = m.groupdict()
-                print(dct)
                 entry = Repository(
                     dct["remote"],
                     dct["local"],
@@ -102,7 +101,8 @@ def parse_repo_file(path):
 if __name__ == "__main__":
     config_file = sys.argv[1]
     config_parser = configparser.ConfigParser()
-    config = config_parser.read(config_file)["config"]
+    config_parser.read(config_file)
+    config = config_parser["config"]
 
     logging_dir = config["logging_dir"]
     repository_dir = config["repository_dir"]
