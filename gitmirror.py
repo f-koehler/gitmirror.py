@@ -1,6 +1,7 @@
 #!/bin/env python3
 import configparser
 import datetime
+import multiprocessing
 import os
 import re
 import subprocess
@@ -10,6 +11,7 @@ regex_repo_entry = re.compile(
     r"^(?P<remote>[\w\d@\.\:\-\/]+)(?:\s+\[(?P<remote_options>.*)\])?\s+->\s*(?P<local>[\w\d\.\-\/]+)\s+(?:\[(?P<local_options>.*)\])?$"
 )
 
+jobs = os.cpu_count()
 repository_dir = None
 repository_file = None
 logging_dir = None
@@ -104,6 +106,7 @@ if __name__ == "__main__":
     config_parser.read(config_file)
     config = config_parser["config"]
 
+    jobs = int(config["jobs"])
     logging_dir = config["logging_dir"]
     repository_dir = config["repository_dir"]
     repository_file = config["repository_file"]
@@ -111,5 +114,8 @@ if __name__ == "__main__":
     time_stamp = datetime.datetime.now().strftime("%Y-%m-%d-%H-%M-%S")
     repos = parse_repo_file(repository_file)
 
-    for repo in repos:
+    def run(repo):
         repo.mirror(time_stamp)
+
+    with multiprocessing.Pool(jobs) as pool:
+        pool.map(run, repos)
