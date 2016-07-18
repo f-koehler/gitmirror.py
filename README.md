@@ -33,10 +33,10 @@ repository_file = /home/git/.gitmirror/repositories.txt
 
 Description:
 
-- jobs (optional): number of jobs in multithreaded run
-- logging_dir: directory where logs will be created
-- repository_dir: dir where all repositories will be mirrored
-- repository_file: file containing the repository list
+- `jobs` (optional): number of jobs in multithreaded run
+- `logging_dir`: directory where logs will be created
+- `repository_dir`: dir where all repositories will be mirrored
+- `repository_file`: file containing the repository list
 
 
 Repository list
