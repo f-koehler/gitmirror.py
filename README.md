@@ -12,8 +12,8 @@ Status
 - [x] Parse repo list
 - [x] Basic cloning and updating
 - [x] Basic logging
-- [ ] Support cloning to remote locations (e.g. SSH, FTP)
-- [ ] Add option handling for remote and local (necessary for remote clone destinations)
+- [ ] Support cloning to remote locations (SSH)
+- [ ] Add option handling for remote and local
 - [ ] Run jobs in parallel
 
 
